@@ -302,19 +302,6 @@ The program will display:
 
 ---
 
-## 📁 Project Structure
-
-```text
-Single-Server-Queue-Simulation/
-│
-├── single_server_queue.py
-└── README.md
-```
-
-> Replace `single_server_queue.py` with your actual Python filename if it is different.
-
----
-
 ## 📚 Conclusion
 
 This experiment demonstrates the implementation of a **single-server queuing system using Python simulation**.
