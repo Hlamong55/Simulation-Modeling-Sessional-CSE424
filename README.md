@@ -1,311 +1,229 @@
-# Simulation & Modeling Sessional
-A Python-based simulation of a **single-server queuing system** using predefined random numbers for customer inter-arrival time and service time.
+## Simulation & Modeling Sessional - CSE 454
+
+This repository contains Python implementations of different experiments performed in the **Simulation & Modeling Sessional Course**.
+
+The experiments cover queue simulation, inventory simulation, and random number generation using mathematical methods.
 
 ---
 
-## 📌 Experiment: Single-Server Queue Simulation
+## Experiments
 
-This experiment demonstrates how a **Single-Server Queue** can be modeled and analyzed using simulation.
+### 1. Single-Server Queue Simulation
 
-The program simulates **8 customers** and calculates:
+**Description:**
 
-* Inter-Arrival Time (IAT)
-* Arrival Time
-* Service Time (ST)
-* Time Service Begins (TSB)
-* Waiting Time (WT)
-* Time Service Ends (TSE)
-* Time Spent in System (TSS)
-* Idle Time of Server (ITS)
+This experiment simulates a single-server queuing system using predefined random numbers. It determines customer arrival times, service times, waiting times, and server idle times.
 
-Finally, the program generates a **simulation table** and calculates several **statistical measures**.
+**Key Features:**
 
----
+- Generates Inter-Arrival Time (IAT) from random numbers.
+- Generates Service Time (ST) from random numbers.
+- Calculates customer Arrival Time.
+- Calculates Time Service Begins (TSB).
+- Calculates Waiting Time (WT).
+- Calculates Time Service Ends (TSE).
+- Calculates Time Spent in System (TSS).
+- Calculates Idle Time of Server (ITS).
+- Generates a customer-wise simulation table.
+- Provides a statistical summary.
 
-## 🎯 Objectives
+**Statistical Measures:**
 
-The main objectives of this experiment are:
-
-1. To understand the basic concept of queue simulation.
-2. To simulate a single-server queuing system using Python.
-3. To convert random numbers into inter-arrival and service times.
-4. To calculate customer waiting time.
-5. To calculate the total time spent by customers in the system.
-6. To determine the idle time of the server.
-7. To analyze the performance of the queuing system.
-
----
-
-## 🧰 Technologies Used
-
-* **Python 3**
-* Lists
-* Functions
-* Loops
-* Conditional Statements
-* Basic Arithmetic Operations
+- Average Waiting Time
+- Average Inter-Arrival Time
+- Average Service Time
+- Average Time in System
+- Total Server Idle Time
+- Average Waiting Time of Customers Who Waited
 
 ---
 
-## 📊 Random Numbers
+### 2. Newspaper Inventory Simulation
 
-The simulation uses two sets of random numbers.
+**Description:**
 
-### Random Numbers for Inter-Arrival Time
+This experiment implements a newspaper inventory simulation using random numbers and probability distributions.
 
-Used for **customers 2–8**:
+The simulation determines the type of newsday (Good, Fair, or Poor), calculates daily newspaper demand, and evaluates the daily profit based on sales revenue, scrap revenue, and purchase cost.
+
+**Key Features:**
+
+- Determines newsday type using random numbers.
+- Uses probability distributions to generate daily demand.
+- Calculates the number of newspapers sold.
+- Calculates unsold newspapers.
+- Calculates sales revenue.
+- Calculates scrap revenue.
+- Calculates daily profit.
+- Calculates total profit over multiple days.
+- Generates a complete simulation table.
+
+**Business Parameters:**
+
+| Parameter | Value |
+|---|---:|
+| Newspapers Purchased per Day | 80 |
+| Purchase Price | $0.50 |
+| Selling Price | $0.75 |
+| Scrap Value | $0.15 |
+| Simulation Period | 5 Days |
+
+**Profit Calculation:**
 
 ```text
-[861, 341, 142, 156, 476, 271, 178]
-```
-
-### Random Numbers for Service Time
-
-Used for **customers 1–8**:
-
-```text
-[12, 31, 27, 69, 91, 55, 77, 54]
-```
-
----
-
-## 🔢 Random Number Mapping
-
-Random numbers are converted into **Inter-Arrival Time (IAT)** and **Service Time (ST)** using predefined ranges.
-
-### Inter-Arrival Time (IAT)
-
-| Random Number | IAT |
-| ------------- | --: |
-| 1–125         |   1 |
-| 126–250       |   2 |
-| 251–375       |   3 |
-| 376–500       |   4 |
-| 501–625       |   5 |
-| 626–750       |   6 |
-| 751–875       |   7 |
-| 876–999       |   8 |
-
-The mapping is implemented using the `get_iat()` function.
-
-### Service Time (ST)
-
-| Random Number | ST |
-| ------------- | -: |
-| 1–10          |  1 |
-| 11–30         |  2 |
-| 31–60         |  3 |
-| 61–85         |  4 |
-| 86–95         |  5 |
-| 96–999        |  6 |
-
-The mapping is implemented using the `get_st()` function.
-
----
-
-## ⚙️ Simulation Logic
-
-The simulation processes each customer sequentially.
-
-### 1. Arrival Time
-
-For the first customer:
-
-```text
-Arrival Time = 0
-```
-
-For subsequent customers:
-
-```text
-Arrival Time = Previous Arrival Time + IAT
+Profit = Sales Revenue + Scrap Revenue - Purchase Cost
 ```
 
 ---
 
-### 2. Time Service Begins (TSB)
+### 3. Linear Congruential Generator (LCG)
 
-The server starts serving a customer when both the customer has arrived and the server is available.
+**Description:**
+
+This experiment implements a **Linear Congruential Generator (LCG)** in Python to generate pseudo-random numbers using a mathematical recurrence relation.
+
+The program generates random numbers based on the given seed and parameters, calculates normalized random values, determines the period length, and checks the full-period conditions using the Hull-Dobell Theorem.
+
+**Mathematical Formula:**
 
 ```text
-TSB = max(Arrival Time, Previous Service End Time)
+Xi = (a * Xi-1 + c) mod m
 ```
+
+Where:
+
+- `Xi` = Current random integer
+- `Xi-1` = Previous random integer
+- `a` = Multiplier
+- `c` = Increment
+- `m` = Modulus
+- `X0` = Initial seed
+
+**Normalized Random Number:**
+
+```text
+Ri = Xi / m
+```
+
+**Key Features:**
+
+- Takes seed and LCG parameters as user input.
+- Generates pseudo-random numbers.
+- Calculates normalized random values.
+- Displays the generated sequence in a formatted table.
+- Determines the period length of the generated sequence.
+- Checks the full-period conditions using the Hull-Dobell Theorem.
+
+**Hull-Dobell Full-Period Conditions:**
+
+For a mixed LCG (`c != 0`) to have a full period, the following conditions must hold:
+
+1. `gcd(c, m) = 1`
+2. Every prime factor of `m` must divide `(a - 1)`.
+3. If `m` is divisible by 4, then `(a - 1)` must also be divisible by 4.
 
 ---
 
-### 3. Waiting Time (WT)
+## Technologies Used
 
-Waiting time is calculated as:
-
-```text
-WT = TSB - Arrival Time
-```
-
-If the server is busy when a customer arrives, the customer has to wait.
-
----
-
-### 4. Time Service Ends (TSE)
-
-The service end time is calculated as:
-
-```text
-TSE = TSB + Service Time
-```
+- Python 3
+- Basic Mathematical Operations
+- Probability Distributions
+- Random Number Generation
+- Lists and Dictionaries
+- Functions and Loops
+- Conditional Statements
 
 ---
 
-### 5. Time Spent in System (TSS)
-
-The total time spent in the system is:
+## Project Structure
 
 ```text
-TSS = TSE - Arrival Time
+Simulation-Modeling-Sessional/
+│
+├── single_server_queue.py
+├── newspaper_inventory.py
+├── random_number_lcg.py
+│
+└── README.md
 ```
 
-This includes both **waiting time and service time**.
+*Note: Replace the Python filenames above with the actual filenames used in this repository.*
 
 ---
 
-### 6. Idle Time of Server (ITS)
+## Requirements
 
-If a customer arrives after the server has finished serving the previous customer:
+- Python 3.x
+- No external Python packages are required.
 
-```text
-ITS = Arrival Time - Previous Service End Time
-```
-
-Otherwise:
-
-```text
-ITS = 0
-```
-
-The program implements this using:
-
-```python
-its = max(0, arrival - prev_end)
-```
+The programs use Python's built-in features and standard library.
 
 ---
 
-## 📋 Simulation Table
+## How to Run
 
-The program generates a formatted table containing the following information:
+Clone the repository:
 
-| Column  | Description                          |
-| ------- | ------------------------------------ |
-| Cust    | Customer Number                      |
-| RN(IAT) | Random Number for Inter-Arrival Time |
-| IAT     | Inter-Arrival Time                   |
-| Arr     | Arrival Time                         |
-| RN(ST)  | Random Number for Service Time       |
-| ST      | Service Time                         |
-| TSB     | Time Service Begins                  |
-| WT      | Waiting Time                         |
-| TSE     | Time Service Ends                    |
-| TSS     | Time Spent in System                 |
-| ITS     | Idle Time of Server                  |
-
-The output format is:
-
-```text
-Cust  RN(IAT)   IAT   Arr   RN(ST)   ST   TSB   WT   TSE   TSS   ITS
+```bash
+git clone <repository-url>
 ```
 
----
+Navigate to the project directory:
 
-## 🧮 Statistical Summary
-
-After completing the simulation, the program calculates the following statistics.
-
-### Average Waiting Time
-
-```text
-Average Waiting Time
-= Total Waiting Time / Number of Customers
+```bash
+cd Simulation-Modeling-Sessional
 ```
 
-### Average Inter-Arrival Time
+Run an experiment:
 
-```text
-Average IAT
-= Total IAT / Number of Customers
-```
-
-### Average Service Time
-
-```text
-Average Service Time
-= Total Service Time / Number of Customers
-```
-
-### Average Time in System
-
-```text
-Average Time in System
-= Total Time in System / Number of Customers
-```
-
-### Total Server Idle Time
-
-```text
-Total Server Idle Time
-= Sum of all Idle Times
-```
-
-### Average Waiting Time of Customers Who Waited
-
-Only customers whose waiting time is greater than zero are considered.
-
-```text
-Average Waiting Time (Customers Who Waited)
-= Total Waiting Time of Waiting Customers
-  / Number of Waiting Customers
-```
-
----
-
-## 📈 Program Features
-
-* Converts random numbers into inter-arrival times.
-* Converts random numbers into service times.
-* Simulates customer arrivals.
-* Determines when the server starts serving each customer.
-* Calculates customer waiting time.
-* Calculates service completion time.
-* Calculates total time spent in the system.
-* Tracks server idle time.
-* Generates a formatted simulation table.
-* Calculates statistical performance measures.
-
----
-
-## ▶️ How to Run
-
-### Prerequisites
-
-Make sure **Python 3** is installed on your system.
-
-### Run the Program
-
-Open the project directory in a terminal and run:
+**1. Single-Server Queue Simulation**
 
 ```bash
 python single_server_queue.py
 ```
 
-The program will display:
+**2. Newspaper Inventory Simulation**
 
-1. The complete simulation table.
-2. The statistical summary.
+```bash
+python newspaper_inventory.py
+```
+
+**3. Linear Congruential Generator**
+
+```bash
+python lcg.py
+```
+
+For the LCG program, enter the required values when prompted:
+
+- Seed (X0)
+- Multiplier (a)
+- Increment (c)
+- Modulus (m)
+- Number of random numbers
 
 ---
 
-## 📚 Conclusion
+## Learning Outcomes
 
-This experiment demonstrates the implementation of a **single-server queuing system using Python simulation**.
+Through these experiments, the following concepts are explored:
 
-By using predefined random numbers and probability-based mappings, the program determines customer arrival and service times. It then calculates waiting time, service time, time spent in the system, and server idle time.
+- Understanding and implementing single-server queuing systems.
+- Analyzing customer arrival and service patterns.
+- Calculating queue performance measures.
+- Understanding probability-based inventory simulation.
+- Evaluating daily and total profit in inventory systems.
+- Understanding pseudo-random number generation.
+- Analyzing the period of a Linear Congruential Generator.
+- Applying the Hull-Dobell theorem to check full-period conditions.
 
-The experiment provides a practical understanding of how **simulation techniques can be used to analyze and evaluate the performance of queuing systems**.
+---
+
+## Conclusion
+
+This repository demonstrates the practical implementation of important Simulation & Modeling concepts using Python.
+
+The experiments provide hands-on experience with **queueing systems, inventory management, probability distributions, and pseudo-random number generation**.
+
+Each experiment helps develop a better understanding of how mathematical models and simulation techniques can be applied to solve real-world problems.
